@@ -5,6 +5,9 @@
 #define BLINK_TIME 125
 #define BLINK_PERIOD 250
 
+#define EEPROM_ADDL_L 0
+#define EEPROM_ADDL_H 10
+
 enum Mode {RWD, AWD_H, AWD_L};
 
 class Transmission {
@@ -15,6 +18,8 @@ private:
     void updateLEDs();
 
     int ledRWD, ledAWD_H, ledAWD_L;
+    Mode restoreModeFromEEPROM();
+    void storeModeToEEPROM(Mode m);
     
 public:
     Transmission(int led2h, int led4h, int led4L, int out2h, int out4h, int out4l);

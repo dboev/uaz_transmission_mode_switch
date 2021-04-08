@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <avr/eeprom.h>
 #include "Transmission.h"
 
 
@@ -9,8 +10,9 @@ Transmission::Transmission(int led2h, int led4h, int led4l, int out2h, int out4h
   ledAWD_H = led4h; 
   ledAWD_L = led4l;
 
-  mode = RWD;
-  nextMode = RWD;
+  Mode lastMode = restoreModeFromEEPROM();
+  mode = lastMode;
+  nextMode = lastMode;
   
   updateState();
 }
@@ -153,5 +155,16 @@ void Transmission::selectMode() {
       setNextMode(Mode::AWD_L);
     }
   }
+  
+}
+
+
+
+Mode Transmission::restoreModeFromEEPROM(){
+
+  return RWD;
+  
+}
+void Transmission::storeModeToEEPROM(Mode m){
   
 }
